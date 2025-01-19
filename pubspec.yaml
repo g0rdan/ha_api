@@ -1,15 +1,19 @@
 name: ha
-description: A starting point for Dart libraries or applications.
+description: Dart client library for the Home Assistant API.
 version: 0.0.1
-# repository: https://github.com/my_org/my_repo
+repository: https://github.com/g0rdan/home_assistant_dart_client
 
 environment:
-  sdk: ^3.5.0
+  sdk: ^3.6.0
 
 # Add regular dependencies here.
 dependencies:
-  # path: ^1.8.0
+  json: ^0.20.2
+  http: ^1.2.2
+  json_annotation: ^4.9.0
 
 dev_dependencies:
+  build_runner: ^2.4.14
+  json_serializable: ^6.9.3
   lints: ^5.0.0
   test: ^1.24.0
