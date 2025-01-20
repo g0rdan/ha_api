@@ -1,3 +1,13 @@
 {
-  "dart.flutterSdkPath": ".fvm/versions/3.27.2"
+  "dart.flutterSdkPath": ".fvm/versions/3.27.2",
+  "[dart]": {
+    "editor.formatOnSave": true,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.rulers": [80],
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit",
+      "source.fixAll": "explicit"
+    }
+  },
+  "cSpell.words": ["dartdocs"]
 }
