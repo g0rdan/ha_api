@@ -1,11 +1,12 @@
 
+import 'package:ha/src/system/exact.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'ping_response.g.dart';
 
 @JsonSerializable()
-class PingResponse {
-  PingResponse({
+class PingResponse implements Exact {
+  const PingResponse({
     required this.message,
   });
 
@@ -17,4 +18,9 @@ class PingResponse {
       _$PingResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$PingResponseToJson(this);
+  
+  @override
+  Iterable<Object?> get properties => [
+        message,
+      ];
 }

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:ha/src/clients/http_client.dart';
-import 'package:ha/src/models/api/ping_response.dart';
+import 'package:ha/src/models/api/export.dart';
 import 'package:ha/src/system/service_locator.dart';
 
 class HaService {
@@ -25,21 +25,34 @@ class HaService {
   }
 
   Future<PingResponse?> ping() async {
-    final endpoint = '/api/';
+    const endpoint = '/api/';
     final response = await _httpClient.get(_url + endpoint, _headers);
-    if (response != null) {
-      return PingResponse.fromJson(jsonDecode(response.body));
-    }
-    return null;
+    return response != null
+        ? PingResponse.fromJson(jsonDecode(response.body))
+        : null;
   }
 
-  Future<dynamic> config() async {
-    final endpoint = '/api/config';
-    return await _httpClient.get(_url + endpoint, _headers);
+  Future<ConfigResponse?> config() async {
+    const endpoint = '/api/config';
+    final response = await _httpClient.get(_url + endpoint, _headers);
+    return response != null
+        ? ConfigResponse.fromJson(jsonDecode(response.body))
+        : null;
   }
 
-  Future<dynamic> events() async {
-    final endpoint = '/api/events';
-    return await _httpClient.get(_url + endpoint, _headers);
+  Future<EventsResponse?> events() async {
+    const endpoint = '/api/events';
+    final response = await _httpClient.get(_url + endpoint, _headers);
+    return response != null
+        ? EventsResponse.fromResponse(jsonDecode(response.body))
+        : null;
+  }
+
+  Future<ServicesResponse?> services() async {
+    const endpoint = '/api/services';
+    final response = await _httpClient.get(_url + endpoint, _headers);
+    return response != null
+        ? ServicesResponse.fromResponse(jsonDecode(response.body))
+        : null;
   }
 }
