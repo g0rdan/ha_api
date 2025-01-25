@@ -55,4 +55,26 @@ class HaService {
         ? ServicesResponse.fromResponse(jsonDecode(response.body))
         : null;
   }
+
+  Future<StatesResponse?> states() async {
+    const endpoint = '/api/states';
+    final response = await _httpClient.get(_url + endpoint, _headers);
+    return response != null
+        ? StatesResponse.fromResponse(jsonDecode(response.body))
+        : null;
+  }
+
+  Future<State?> state({
+    required String entityId,
+  }) async {
+    final endpoint = '/api/states/$entityId';
+    final response = await _httpClient.get(_url + endpoint, _headers);
+    return response != null ? State.fromJson(jsonDecode(response.body)) : null;
+  }
+
+  Future<String?> errorLog() async {
+    final endpoint = '/api/error_log';
+    final response = await _httpClient.get(_url + endpoint, _headers);
+    return response?.body;
+  }
 }

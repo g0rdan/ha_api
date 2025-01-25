@@ -8,11 +8,11 @@ class ServicesResponse implements Exact {
     this.data,
   });
 
-  final List<Service>? data;
+  final List<ServicesDomain>? data;
 
   factory ServicesResponse.fromResponse(dynamic list) {
     return ServicesResponse(
-      data: (list as Iterable).map((e) => Service.fromJson(e)).toList(),
+      data: (list as Iterable).map((e) => ServicesDomain.fromJson(e)).toList(),
     );
   }
 
@@ -21,8 +21,8 @@ class ServicesResponse implements Exact {
 }
 
 @JsonSerializable()
-class Service implements Exact {
-  const Service({
+class ServicesDomain implements Exact {
+  const ServicesDomain({
     this.domain,
     this.services,
   });
@@ -30,7 +30,40 @@ class Service implements Exact {
   @JsonKey(name: 'domain')
   final String? domain;
   @JsonKey(name: 'services')
-  final dynamic services;
+  final Map<String, Service>? services;
+
+  factory ServicesDomain.fromJson(Map<String, dynamic> json) =>
+      _$ServicesDomainFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ServicesDomainToJson(this);
+
+  @override
+  Iterable<Object?> get properties => [
+        domain,
+        services,
+      ];
+}
+
+@JsonSerializable()
+class Service implements Exact {
+  const Service({
+    required this.name,
+    required this.description,
+    this.fields,
+    this.target,
+  });
+
+  @JsonKey(name: 'name')
+  final String name;
+
+  @JsonKey(name: 'description')
+  final String description;
+
+  @JsonKey(name: 'fields')
+  final Map<String, dynamic>? fields;
+
+  @JsonKey(name: 'target')
+  final Map<String, dynamic>? target;
 
   factory Service.fromJson(Map<String, dynamic> json) =>
       _$ServiceFromJson(json);
@@ -39,7 +72,9 @@ class Service implements Exact {
 
   @override
   Iterable<Object?> get properties => [
-        domain,
-        ...?services,
+        name,
+        description,
+        fields,
+        target,
       ];
 }
