@@ -1,15 +1,16 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
-import 'package:ha/src/clients/http_client.dart';
-import 'package:ha/src/models/api/export.dart';
-import 'package:ha/src/system/service_locator.dart';
+import 'package:ha_api/src/api/models/export.dart';
+import 'package:ha_api/src/http/http_client.dart';
+import 'package:ha_api/src/system/service_locator.dart';
 
-class HaService {
+class HaApi {
   late final HttpClient _httpClient;
   late final String _url;
   late final Map<String, String> _headers;
 
-  void init ({
+  void init({
     required String url,
     required String token,
   }) {
@@ -27,40 +28,40 @@ class HaService {
   Future<PingResponse?> ping() async {
     const endpoint = '/api/';
     final response = await _httpClient.get(_url + endpoint, _headers);
-    return response != null
-        ? PingResponse.fromJson(jsonDecode(response.body))
+    return response.success
+        ? PingResponse.fromJson(jsonDecode(response.dataStr))
         : null;
   }
 
   Future<ConfigResponse?> config() async {
     const endpoint = '/api/config';
     final response = await _httpClient.get(_url + endpoint, _headers);
-    return response != null
-        ? ConfigResponse.fromJson(jsonDecode(response.body))
+    return response.success
+        ? ConfigResponse.fromJson(jsonDecode(response.dataStr))
         : null;
   }
 
   Future<EventsResponse?> events() async {
     const endpoint = '/api/events';
     final response = await _httpClient.get(_url + endpoint, _headers);
-    return response != null
-        ? EventsResponse.fromResponse(jsonDecode(response.body))
+    return response.success
+        ? EventsResponse.fromResponse(jsonDecode(response.dataStr))
         : null;
   }
 
   Future<ServicesResponse?> services() async {
     const endpoint = '/api/services';
     final response = await _httpClient.get(_url + endpoint, _headers);
-    return response != null
-        ? ServicesResponse.fromResponse(jsonDecode(response.body))
+    return response.success
+        ? ServicesResponse.fromResponse(jsonDecode(response.dataStr))
         : null;
   }
 
   Future<StatesResponse?> states() async {
     const endpoint = '/api/states';
     final response = await _httpClient.get(_url + endpoint, _headers);
-    return response != null
-        ? StatesResponse.fromResponse(jsonDecode(response.body))
+    return response.success
+        ? StatesResponse.fromResponse(jsonDecode(response.dataStr))
         : null;
   }
 
@@ -69,20 +70,22 @@ class HaService {
   }) async {
     final endpoint = '/api/states/$entityId';
     final response = await _httpClient.get(_url + endpoint, _headers);
-    return response != null ? State.fromJson(jsonDecode(response.body)) : null;
+    return response.success
+        ? State.fromJson(jsonDecode(response.dataStr))
+        : null;
   }
 
   Future<String?> errorLog() async {
-    final endpoint = '/api/error_log';
+    const endpoint = '/api/error_log';
     final response = await _httpClient.get(_url + endpoint, _headers);
-    return response?.body;
+    return response.success ? response.dataStr : null;
   }
 
   Future<CalendarsResponse?> calendars() async {
-    final endpoint = '/api/calendars';
+    const endpoint = '/api/calendars';
     final response = await _httpClient.get(_url + endpoint, _headers);
-    return response != null
-        ? CalendarsResponse.fromResponse(jsonDecode(response.body))
+    return response.success
+        ? CalendarsResponse.fromResponse(jsonDecode(response.dataStr))
         : null;
   }
 
@@ -91,13 +94,22 @@ class HaService {
     required DateTime start,
     required DateTime end,
   }) async {
-    final starIsotStr = start.toIso8601String();
+    final starIsoStr = start.toIso8601String();
     final endIsoStr = end.toIso8601String();
     final endpoint =
-        '/api/calendars/$entityId?start=$starIsotStr&end=$endIsoStr';
+        '/api/calendars/$entityId?start=$starIsoStr&end=$endIsoStr';
     final response = await _httpClient.get(_url + endpoint, _headers);
-    return response != null
-        ? CalendarResponse.fromResponse(jsonDecode(response.body))
+    return response.success
+        ? CalendarResponse.fromResponse(jsonDecode(response.dataStr))
         : null;
+  }
+
+  Future<Uint8List?> cameraProxy({
+    required String entityId,
+    required String time,
+  }) async {
+    final endpoint = '/api/camera_proxy/$entityId?time=$time';
+    final response = await _httpClient.get(_url + endpoint, _headers);
+    return response.success ? response.dataBytes : null;
   }
 }

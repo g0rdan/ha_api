@@ -1,5 +1,5 @@
 
-import 'package:ha/src/system/exact.dart';
+import 'package:ha_api/src/system/exact.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'ping_response.g.dart';

@@ -1,4 +1,4 @@
-import 'package:ha/src/services/ha_service.dart';
+import 'package:ha_api/src/ha_api.dart';
 
 void main() {
   final url = const String.fromEnvironment('URL');
