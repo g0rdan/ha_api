@@ -10,7 +10,7 @@ class HttpResponse implements Exact {
 
   final Response response;
 
-  bool get success => response.statusCode == 200 && response.body.isNotEmpty;
+  bool get success => response.statusCode >= 200 && response.statusCode < 300;
 
   String get dataStr => response.body;
 
