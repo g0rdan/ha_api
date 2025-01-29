@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'states_response.g.dart';
 
-class StatesResponse {
+class StatesResponse implements Exact {
   const StatesResponse({
     required this.data,
   });
@@ -14,6 +14,9 @@ class StatesResponse {
       data: (list as Iterable).map((e) => State.fromJson(e)).toList(),
     );
   }
+  
+  @override
+  Iterable<Object?> get properties => data ?? [];
 }
 
 @JsonSerializable()

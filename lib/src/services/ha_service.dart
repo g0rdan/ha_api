@@ -77,4 +77,27 @@ class HaService {
     final response = await _httpClient.get(_url + endpoint, _headers);
     return response?.body;
   }
+
+  Future<CalendarsResponse?> calendars() async {
+    final endpoint = '/api/calendars';
+    final response = await _httpClient.get(_url + endpoint, _headers);
+    return response != null
+        ? CalendarsResponse.fromResponse(jsonDecode(response.body))
+        : null;
+  }
+
+  Future<CalendarResponse?> calendar({
+    required String entityId,
+    required DateTime start,
+    required DateTime end,
+  }) async {
+    final starIsotStr = start.toIso8601String();
+    final endIsoStr = end.toIso8601String();
+    final endpoint =
+        '/api/calendars/$entityId?start=$starIsotStr&end=$endIsoStr';
+    final response = await _httpClient.get(_url + endpoint, _headers);
+    return response != null
+        ? CalendarResponse.fromResponse(jsonDecode(response.body))
+        : null;
+  }
 }
