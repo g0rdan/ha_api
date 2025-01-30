@@ -8,7 +8,6 @@ environment:
 
 # Add regular dependencies here.
 dependencies:
-  json: ^0.20.2
   http: ^1.2.2
   json_annotation: ^4.9.0
 

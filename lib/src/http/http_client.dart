@@ -20,7 +20,7 @@ class HttpClient {
   Future<HttpResponse> post(
     String url,
     Map<String, String> headers,
-    Map<String, dynamic>? body,
+    String? body,
   ) async {
     try {
       final response = await http.post(

@@ -11,7 +11,6 @@ class HaApi {
     required String token,
   }) {
     _headers = {
-      'Content-Type': 'application/json',
       'Authorization': 'Bearer $token',
     };
     final locator = ServiceLocator.instance;
@@ -24,6 +23,7 @@ class HaApi {
   late final HttpClient _httpClient;
 
   Future<PingResponse?> ping() async {
+    _headers['Content-Type'] = 'application/json';
     const endpoint = '/api/';
     final response = await _httpClient.get(url + endpoint, _headers);
     return response.success
@@ -31,7 +31,8 @@ class HaApi {
         : null;
   }
 
-  Future<ConfigResponse?> config() async {
+  Future<ConfigResponse?> getConfig() async {
+    _headers['Content-Type'] = 'application/json';
     const endpoint = '/api/config';
     final response = await _httpClient.get(url + endpoint, _headers);
     return response.success
@@ -39,7 +40,8 @@ class HaApi {
         : null;
   }
 
-  Future<EventsResponse?> events() async {
+  Future<EventsResponse?> getEvents() async {
+    _headers['Content-Type'] = 'application/json';
     const endpoint = '/api/events';
     final response = await _httpClient.get(url + endpoint, _headers);
     return response.success
@@ -47,7 +49,8 @@ class HaApi {
         : null;
   }
 
-  Future<ServicesResponse?> services() async {
+  Future<ServicesResponse?> getServices() async {
+    _headers['Content-Type'] = 'application/json';
     const endpoint = '/api/services';
     final response = await _httpClient.get(url + endpoint, _headers);
     return response.success
@@ -55,7 +58,8 @@ class HaApi {
         : null;
   }
 
-  Future<StatesResponse?> states() async {
+  Future<StatesResponse?> getStates() async {
+    _headers['Content-Type'] = 'application/json';
     const endpoint = '/api/states';
     final response = await _httpClient.get(url + endpoint, _headers);
     return response.success
@@ -63,9 +67,10 @@ class HaApi {
         : null;
   }
 
-  Future<State?> state({
+  Future<State?> getState({
     required String entityId,
   }) async {
+    _headers['Content-Type'] = 'application/json';
     final endpoint = '/api/states/$entityId';
     final response = await _httpClient.get(url + endpoint, _headers);
     return response.success
@@ -73,13 +78,15 @@ class HaApi {
         : null;
   }
 
-  Future<String?> errorLog() async {
+  Future<String?> getErrorLog() async {
+    _headers['Content-Type'] = 'application/json';
     const endpoint = '/api/error_log';
     final response = await _httpClient.get(url + endpoint, _headers);
     return response.success ? response.dataStr : null;
   }
 
-  Future<CalendarsResponse?> calendars() async {
+  Future<CalendarsResponse?> getCalendars() async {
+    _headers['Content-Type'] = 'application/json';
     const endpoint = '/api/calendars';
     final response = await _httpClient.get(url + endpoint, _headers);
     return response.success
@@ -87,11 +94,12 @@ class HaApi {
         : null;
   }
 
-  Future<CalendarResponse?> calendar({
+  Future<CalendarResponse?> getCalendar({
     required String entityId,
     required DateTime start,
     required DateTime end,
   }) async {
+    _headers['Content-Type'] = 'application/json';
     final starIsoStr = start.toIso8601String();
     final endIsoStr = end.toIso8601String();
     final endpoint =
@@ -102,10 +110,11 @@ class HaApi {
         : null;
   }
 
-  Future<Uint8List?> cameraProxy({
+  Future<Uint8List?> getCameraProxy({
     required String entityId,
     required String time,
   }) async {
+    _headers['Content-Type'] = 'application/json';
     final endpoint = '/api/camera_proxy/$entityId?time=$time';
     final response = await _httpClient.get(url + endpoint, _headers);
     return response.success ? response.dataBytes : null;
@@ -116,6 +125,22 @@ class HaApi {
     final response = await _httpClient.post(url + endpoint, _headers, null);
     return response.success
         ? CheckConfigResponse.fromJson(jsonDecode(response.dataStr))
+        : null;
+  }
+
+  Future<State?> postState({
+    required String entityId,
+    required String state,
+    Map<String, dynamic>? attributes,
+  }) async {
+    final endpoint = '/api/states/$entityId';
+    final data = jsonEncode({
+      'state': state,
+      'attributes': attributes,
+    });
+    final response = await _httpClient.post(url + endpoint, _headers, data);
+    return response.success
+        ? State.fromJson(jsonDecode(response.dataStr))
         : null;
   }
 }
