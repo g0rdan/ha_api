@@ -1,16 +1,17 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'ping_response.dart';
+part of 'message_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-PingResponse _$PingResponseFromJson(Map<String, dynamic> json) => PingResponse(
+MessageResponse _$MessageResponseFromJson(Map<String, dynamic> json) =>
+    MessageResponse(
       message: json['message'] as String,
     );
 
-Map<String, dynamic> _$PingResponseToJson(PingResponse instance) =>
+Map<String, dynamic> _$MessageResponseToJson(MessageResponse instance) =>
     <String, dynamic>{
       'message': instance.message,
     };
