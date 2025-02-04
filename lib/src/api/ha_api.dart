@@ -129,6 +129,42 @@ class HaApi {
     return response.success ? response.dataBytes : null;
   }
 
+  Future<dynamic> getHistory({
+    required String entityId,
+    DateTime? startTime,
+    DateTime? endTime,
+  }) async {
+    final startTimeStr = startTime?.toIso8601String();
+    final params = {
+      'filter_entity_id': entityId,
+    };
+    if (endTime != null) params['end_time'] = endTime.toIso8601String();
+    final endpoint =
+        '/api/history/period${startTimeStr != null ? '/$startTimeStr' : ''}'
+        '${_formUrlParameters(params)}';
+    final response = await _httpClient.get(url + endpoint, _headers);
+    return response.success ? response.dataBytes : null;
+  }
+
+  Future<LogbookResponse?> getLogbook({
+    String? entityId,
+    DateTime? startTime,
+    DateTime? endTime,
+  }) async {
+    final startTimeStr = startTime?.toIso8601String();
+    Map<String, String> params = {};
+    if (endTime != null) params['end_time'] = endTime.toIso8601String();
+    if (entityId != null) params['entity'] = entityId;
+    final endpoint =
+        '/api/logbook${startTimeStr != null ? '/$startTimeStr' : ''}'
+        '${_formUrlParameters(params)}';
+    final endpointEncoded = Uri.encodeFull(url + endpoint);
+    final response = await _httpClient.get(endpointEncoded, _headers);
+    return response.success
+        ? LogbookResponse.fromResponse(jsonDecode(response.dataStr))
+        : null;
+  }
+
   /// Trigger a check of configuration.yaml. 
   /// 
   /// No additional data needs to be passed in with this request. 
@@ -234,5 +270,15 @@ class HaApi {
     });
     final response = await _httpClient.post(url + endpoint, _headers, data);
     return response.success ? response.dataStr : null;
+  }
+
+  String _formUrlParameters(Map<String, String> parameters) {
+    if (parameters.isEmpty) {
+      return '';
+    }
+    final params = parameters.entries.map((e) {
+      return '${e.key}=${e.value}';
+    });
+    return '?${params.join('&')}';
   }
 }
