@@ -6,8 +6,7 @@ part of 'config_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ConfigResponse _$ConfigResponseFromJson(Map<String, dynamic> json) =>
-    ConfigResponse(
+HaConfig _$HaConfigFromJson(Map<String, dynamic> json) => HaConfig(
       allowlistExternalDirs: (json['allowlist_external_dirs'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
@@ -43,8 +42,7 @@ ConfigResponse _$ConfigResponseFromJson(Map<String, dynamic> json) =>
       internalUrl: json['internal_url'] as String?,
     );
 
-Map<String, dynamic> _$ConfigResponseToJson(ConfigResponse instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$HaConfigToJson(HaConfig instance) => <String, dynamic>{
       'allowlist_external_dirs': instance.allowlistExternalDirs,
       'allowlist_external_urls': instance.allowlistExternalUrls,
       'components': instance.components,

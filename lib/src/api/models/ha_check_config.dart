@@ -4,8 +4,8 @@ import 'package:json_annotation/json_annotation.dart';
 part 'check_config_response.g.dart';
 
 @JsonSerializable()
-class CheckConfigResponse implements Exact {
-  const CheckConfigResponse({
+class HaCheckConfig implements Exact {
+  const HaCheckConfig({
     required this.result,
     required this.errors,
     required this.warnings,
@@ -20,10 +20,10 @@ class CheckConfigResponse implements Exact {
   @JsonKey(name: 'warnings')
   final dynamic warnings;
 
-  factory CheckConfigResponse.fromJson(Map<String, dynamic> json) =>
-      _$CheckConfigResponseFromJson(json);
+  factory HaCheckConfig.fromJson(Map<String, dynamic> json) =>
+      _$HaCheckConfigFromJson(json);
 
-  Map<String, dynamic> toJson() => _$CheckConfigResponseToJson(this);
+  Map<String, dynamic> toJson() => _$HaCheckConfigToJson(this);
 
   @override
   Iterable<Object?> get properties => [

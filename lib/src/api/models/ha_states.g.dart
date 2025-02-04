@@ -6,7 +6,7 @@ part of 'states_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-State _$StateFromJson(Map<String, dynamic> json) => State(
+HaState _$HaStateFromJson(Map<String, dynamic> json) => HaState(
       entityId: json['entity_id'] as String?,
       state: json['state'] as String?,
       attributes: json['attributes'] as Map<String, dynamic>?,
@@ -18,7 +18,7 @@ State _$StateFromJson(Map<String, dynamic> json) => State(
           : DateTime.parse(json['last_updated'] as String),
     );
 
-Map<String, dynamic> _$StateToJson(State instance) => <String, dynamic>{
+Map<String, dynamic> _$HaStateToJson(HaState instance) => <String, dynamic>{
       'entity_id': instance.entityId,
       'state': instance.state,
       'attributes': instance.attributes,

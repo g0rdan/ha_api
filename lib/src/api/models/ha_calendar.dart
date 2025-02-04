@@ -3,15 +3,15 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'calendar_response.g.dart';
 
-class CalendarResponse implements Exact {
-  const CalendarResponse({
+class HaCalendar implements Exact {
+  const HaCalendar({
     required this.data,
   });
 
   final List<Calendar>? data;
 
-  factory CalendarResponse.fromResponse(dynamic list) {
-    return CalendarResponse(
+  factory HaCalendar.fromResponse(dynamic list) {
+    return HaCalendar(
       data: (list as Iterable).map((e) => Calendar.fromJson(e)).toList(),
     );
   }

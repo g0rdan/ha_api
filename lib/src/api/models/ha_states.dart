@@ -3,15 +3,15 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'states_response.g.dart';
 
-class StatesResponse implements Exact {
-  const StatesResponse({
+class HaStates implements Exact {
+  const HaStates({
     required this.data,
   });
-  final List<State>? data;
+  final List<HaState>? data;
 
-  factory StatesResponse.fromResponse(dynamic list) {
-    return StatesResponse(
-      data: (list as Iterable).map((e) => State.fromJson(e)).toList(),
+  factory HaStates.fromResponse(dynamic list) {
+    return HaStates(
+      data: (list as Iterable).map((e) => HaState.fromJson(e)).toList(),
     );
   }
   
@@ -20,8 +20,8 @@ class StatesResponse implements Exact {
 }
 
 @JsonSerializable()
-class State implements Exact {
-  const State({
+class HaState implements Exact {
+  const HaState({
     required this.entityId,
     required this.state,
     required this.attributes,
@@ -44,9 +44,10 @@ class State implements Exact {
   @JsonKey(name: 'last_updated')
   final DateTime? lastUpdated;
 
-  factory State.fromJson(Map<String, dynamic> json) => _$StateFromJson(json);
+  factory HaState.fromJson(Map<String, dynamic> json) =>
+      _$HaStateFromJson(json);
 
-  Map<String, dynamic> toJson() => _$StateToJson(this);
+  Map<String, dynamic> toJson() => _$HaStateToJson(this);
 
   @override
   Iterable<Object?> get properties => [

@@ -3,15 +3,15 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'logbook_response.g.dart';
 
-class LogbookResponse implements Exact {
-  const LogbookResponse({
+class HaLogbook implements Exact {
+  const HaLogbook({
     this.data,
   });
 
   final List<Logbook>? data;
 
-  factory LogbookResponse.fromResponse(dynamic list) {
-    return LogbookResponse(
+  factory HaLogbook.fromResponse(dynamic list) {
+    return HaLogbook(
       data: (list as Iterable).map((e) => Logbook.fromJson(e)).toList(),
     );
   }

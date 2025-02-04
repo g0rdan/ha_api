@@ -6,15 +6,14 @@ part of 'check_config_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-CheckConfigResponse _$CheckConfigResponseFromJson(Map<String, dynamic> json) =>
-    CheckConfigResponse(
+HaCheckConfig _$HaCheckConfigFromJson(Map<String, dynamic> json) =>
+    HaCheckConfig(
       result: json['result'] as String,
       errors: json['errors'],
       warnings: json['warnings'],
     );
 
-Map<String, dynamic> _$CheckConfigResponseToJson(
-        CheckConfigResponse instance) =>
+Map<String, dynamic> _$HaCheckConfigToJson(HaCheckConfig instance) =>
     <String, dynamic>{
       'result': instance.result,
       'errors': instance.errors,

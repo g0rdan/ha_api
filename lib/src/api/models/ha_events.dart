@@ -3,15 +3,15 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'events_response.g.dart';
 
-class EventsResponse implements Exact {
-  const EventsResponse({
+class HaEvents implements Exact {
+  const HaEvents({
     this.data,
   });
 
   final List<Event>? data;
 
-  factory EventsResponse.fromResponse(dynamic list) {
-    return EventsResponse(
+  factory HaEvents.fromResponse(dynamic list) {
+    return HaEvents(
       data: (list as Iterable).map((e) => Event.fromJson(e)).toList(),
     );
   }

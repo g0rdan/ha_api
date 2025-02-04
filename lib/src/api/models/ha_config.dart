@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'config_response.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class ConfigResponse implements Exact {
+class HaConfig implements Exact {
   @JsonKey(name: 'allowlist_external_dirs')
   final List<String>? allowlistExternalDirs;
   @JsonKey(name: 'allowlist_external_urls')
@@ -52,7 +52,7 @@ class ConfigResponse implements Exact {
   @JsonKey(name: 'whitelist_external_dirs')
   final List<String>? whitelistExternalDirs;
 
-  const ConfigResponse({
+  const HaConfig({
     required this.allowlistExternalDirs,
     required this.allowlistExternalUrls,
     required this.components,
@@ -78,10 +78,10 @@ class ConfigResponse implements Exact {
     this.internalUrl,
   });
 
-  factory ConfigResponse.fromJson(Map<String, dynamic> json) =>
-      _$ConfigResponseFromJson(json);
+  factory HaConfig.fromJson(Map<String, dynamic> json) =>
+      _$HaConfigFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ConfigResponseToJson(this);
+  Map<String, dynamic> toJson() => _$HaConfigToJson(this);
   
   @override
   Iterable<Object?> get properties => [

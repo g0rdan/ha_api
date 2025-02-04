@@ -3,15 +3,15 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'services_response.g.dart';
 
-class ServicesResponse implements Exact {
-  const ServicesResponse({
+class HaServices implements Exact {
+  const HaServices({
     this.data,
   });
 
   final List<ServicesDomain>? data;
 
-  factory ServicesResponse.fromResponse(dynamic list) {
-    return ServicesResponse(
+  factory HaServices.fromResponse(dynamic list) {
+    return HaServices(
       data: (list as Iterable).map((e) => ServicesDomain.fromJson(e)).toList(),
     );
   }
