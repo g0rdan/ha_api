@@ -16,11 +16,5 @@ mixin Exact {
   }
 
   @override
-  int get hashCode {
-    int hash = 0;
-    for (var i = 0; i < properties.length; i++) {
-      hash ^= properties.elementAt(i).hashCode;
-    }
-    return hash;
-  }
+  int get hashCode => Object.hashAll(properties);
 }
