@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'message_response.dart';
+part of 'ha_message.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

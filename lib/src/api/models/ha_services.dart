@@ -1,7 +1,7 @@
 import 'package:ha_api/src/system/exact.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'services_response.g.dart';
+part 'ha_services.g.dart';
 
 class HaServices implements Exact {
   const HaServices({

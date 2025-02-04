@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'calendar_response.dart';
+part of 'ha_calendar.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

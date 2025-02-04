@@ -1,7 +1,7 @@
 import 'package:ha_api/src/system/exact.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'calendars_response.g.dart';
+part 'ha_calendars.g.dart';
 
 class HaCalendars implements Exact {
   const HaCalendars({

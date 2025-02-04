@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'logbook_response.dart';
+part of 'ha_logbook.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

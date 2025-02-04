@@ -1,7 +1,7 @@
 import 'package:ha_api/src/system/exact.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'check_config_response.g.dart';
+part 'ha_check_config.g.dart';
 
 @JsonSerializable()
 class HaCheckConfig implements Exact {

@@ -1,7 +1,7 @@
 import 'package:ha_api/src/system/exact.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'events_response.g.dart';
+part 'ha_events.g.dart';
 
 class HaEvents implements Exact {
   const HaEvents({

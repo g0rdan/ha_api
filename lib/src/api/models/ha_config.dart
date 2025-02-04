@@ -1,7 +1,7 @@
 import 'package:ha_api/src/system/exact.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'config_response.g.dart';
+part 'ha_config.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class HaConfig implements Exact {

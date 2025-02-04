@@ -1,7 +1,7 @@
 import 'package:ha_api/src/system/exact.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'message_response.g.dart';
+part 'ha_message.g.dart';
 
 @JsonSerializable()
 class HaMessage implements Exact {

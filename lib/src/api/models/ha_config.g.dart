@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'config_response.dart';
+part of 'ha_config.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

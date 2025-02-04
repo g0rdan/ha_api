@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'services_response.dart';
+part of 'ha_services.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

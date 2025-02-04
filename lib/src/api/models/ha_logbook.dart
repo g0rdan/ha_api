@@ -1,7 +1,7 @@
 import 'package:ha_api/src/system/exact.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'logbook_response.g.dart';
+part 'ha_logbook.g.dart';
 
 class HaLogbook implements Exact {
   const HaLogbook({
