@@ -133,7 +133,7 @@ class HaApi {
         : (null, HaFailure(message: response.dataStr));
   }
 
-  Future<(String?, HaFailure?)> getHistory({
+  Future<(List<HaState>?, HaFailure?)> getHistory({
     required String entityId,
     DateTime? startTime,
     DateTime? endTime,
@@ -147,9 +147,19 @@ class HaApi {
         '/api/history/period${startTimeStr != null ? '/$startTimeStr' : ''}'
         '${_formUrlParameters(params)}';
     final response = await _httpClient.get(url + endpoint, _headers);
-    return response.success
-        ? (response.dataStr, null)
-        : (null, HaFailure(message: response.dataStr));
+    if (response.success) {
+      final states = <HaState>[];
+      final list = (jsonDecode(response.dataStr) as List?);
+      for (var innerList in list ?? []) {
+        for (var stateJson in innerList ?? []) {
+          states.add(HaState.fromJson(stateJson));
+        }
+      }
+      return (states, null);
+    } else {
+      return (null, HaFailure(message: response.dataStr));
+    }
+
   }
 
   Future<(HaLogbook?, HaFailure?)> getLogbook({
@@ -158,7 +168,7 @@ class HaApi {
     DateTime? endTime,
   }) async {
     final startTimeStr = startTime?.toIso8601String();
-    Map<String, String> params = {};
+    final params = <String, String>{};
     if (endTime != null) params['end_time'] = endTime.toIso8601String();
     if (entityId != null) params['entity'] = entityId;
     final endpoint =

@@ -5,17 +5,20 @@ import 'package:http/http.dart';
 
 class HttpResponse implements Exact {
   const HttpResponse({
-    required this.response,
-  });
+    required Response response,
+  }) : _response = response;
 
-  final Response response;
+  final Response _response;
 
-  bool get success => response.statusCode >= 200 && response.statusCode < 300;
+  /// Returns true if the status code is 2XX.
+  bool get success => _response.statusCode >= 200 && _response.statusCode < 300;
 
-  String get dataStr => response.body;
+  /// String representation of the response body.
+  String get dataStr => _response.body;
 
-  Uint8List get dataBytes => response.bodyBytes;
+  /// Byte representation of the response body.
+  Uint8List get dataBytes => _response.bodyBytes;
 
   @override
-  Iterable<Object?> get properties => [response];
+  Iterable<Object?> get properties => [_response];
 }
