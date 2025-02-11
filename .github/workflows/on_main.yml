@@ -17,17 +17,6 @@ jobs:
       - name: Setup FVM
         uses: kuhnroyal/flutter-fvm-config-action/setup@v3
 
-    #   - name: Setup FVM
-    #     run: |
-    #       curl -fsSL https://raw.githubusercontent.com/leoafarias/fvm/master/install.sh | bash
-    #       export PATH="$HOME/.pub-cache/bin:$PATH"
-    #       fvm install  # Ensures the correct Flutter version is installed
-
-    #   - name: Use FVM Flutter
-    #     run: |
-    #       export PATH="$HOME/fvm/default/bin:$PATH"
-    #       fvm flutter --version
-
       - name: Install dependencies
         run: dart pub get
 
@@ -35,11 +24,7 @@ jobs:
         run: flutter test --coverage
 
       - name: Check coverage threshold
-        run: |
-          COVERAGE=$(lcov --summary coverage/lcov.info | grep lines | awk '{print $2}' | sed 's/%//')
-          THRESHOLD=80  # Set your required coverage percentage
-          echo "Coverage: $COVERAGE%"
-          if (( $(echo "$COVERAGE < $THRESHOLD" | bc -l) )); then
-            echo "Code coverage is below the required threshold of $THRESHOLD%"
-            exit 1
-          fi
+        uses: VeryGoodOpenSource/very_good_coverage@v2
+        with:
+          path: '/coverage/lcov.info'
+          min_coverage: 80
