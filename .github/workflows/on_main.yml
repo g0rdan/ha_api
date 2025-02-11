@@ -29,10 +29,10 @@ jobs:
     #       fvm flutter --version
 
       - name: Install dependencies
-        run: fvm flutter pub get
+        run: dart pub get
 
       - name: Run tests with coverage
-        run: fvm flutter test --coverage
+        run: flutter test --coverage
 
       - name: Check coverage threshold
         run: |
