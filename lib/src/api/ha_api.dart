@@ -14,19 +14,20 @@ class HaApi {
       'Authorization': 'Bearer $token',
       'Content-Type': 'application/json',
     };
-    final locator = ServiceLocator.instance;
-    locator.register<HttpClient>(HttpClient());
-    _httpClient = locator.get<HttpClient>();
   }
 
   final String url;
   late final Map<String, String> _headers;
-  late final HttpClient _httpClient;
+  final sl = ServiceLocator.instance;
+
+  void init() {
+    sl.register<HttpClient>(HttpClient());
+  }
 
   /// Returns a message if the API is up and running.
   Future<(HaMessage?, HaFailure?)> ping() async {
     const endpoint = '/api/';
-    final response = await _httpClient.get(url + endpoint, _headers);
+    final response = await sl.get<HttpClient>().get(url + endpoint, _headers);
     return response.success
         ? (HaMessage.fromJson(jsonDecode(response.dataStr)), null)
         : (null, HaFailure(message: response.dataStr));
@@ -35,7 +36,7 @@ class HaApi {
   /// Returns the current configuration as JSON.
   Future<(HaConfig?, HaFailure?)> getConfig() async {
     const endpoint = '/api/config';
-    final response = await _httpClient.get(url + endpoint, _headers);
+    final response = await sl.get<HttpClient>().get(url + endpoint, _headers);
     return response.success
         ? (HaConfig.fromJson(jsonDecode(response.dataStr)), null)
         : (null, HaFailure(message: response.dataStr));
@@ -45,7 +46,7 @@ class HaApi {
   /// and listener count.
   Future<(HaEvents?, HaFailure?)> getEvents() async {
     const endpoint = '/api/events';
-    final response = await _httpClient.get(url + endpoint, _headers);
+    final response = await sl.get<HttpClient>().get(url + endpoint, _headers);
     return response.success
         ? (HaEvents.fromResponse(jsonDecode(response.dataStr)), null)
         : (null, HaFailure(message: response.dataStr));
@@ -55,7 +56,7 @@ class HaApi {
   /// which services it contains.
   Future<(HaServices?, HaFailure?)> getServices() async {
     const endpoint = '/api/services';
-    final response = await _httpClient.get(url + endpoint, _headers);
+    final response = await sl.get<HttpClient>().get(url + endpoint, _headers);
     return response.success
         ? (HaServices.fromResponse(jsonDecode(response.dataStr)), null)
         : (null, HaFailure(message: response.dataStr));
@@ -65,7 +66,7 @@ class HaApi {
   /// attributes: entity_id, state, last_changed and attributes.
   Future<(HaStates?, HaFailure?)> getStates() async {
     const endpoint = '/api/states';
-    final response = await _httpClient.get(url + endpoint, _headers);
+    final response = await sl.get<HttpClient>().get(url + endpoint, _headers);
     return response.success
         ? (HaStates.fromResponse(jsonDecode(response.dataStr)), null)
         : (null, HaFailure(message: response.dataStr));
@@ -76,7 +77,7 @@ class HaApi {
     required String entityId,
   }) async {
     final endpoint = '/api/states/$entityId';
-    final response = await _httpClient.get(url + endpoint, _headers);
+    final response = await sl.get<HttpClient>().get(url + endpoint, _headers);
     return response.success
         ? (HaState.fromJson(jsonDecode(response.dataStr)), null)
         : (null, HaFailure(message: response.dataStr));
@@ -86,7 +87,7 @@ class HaApi {
   /// as a plaintext response.
   Future<(String?, HaFailure?)> getErrorLog() async {
     const endpoint = '/api/error_log';
-    final response = await _httpClient.get(url + endpoint, _headers);
+    final response = await sl.get<HttpClient>().get(url + endpoint, _headers);
     return response.success
         ? (response.dataStr, null)
         : (null, HaFailure(message: response.dataStr));
@@ -95,7 +96,7 @@ class HaApi {
   /// Returns the list of calendar entities.
   Future<(HaCalendars?, HaFailure?)> getCalendars() async {
     const endpoint = '/api/calendars';
-    final response = await _httpClient.get(url + endpoint, _headers);
+    final response = await sl.get<HttpClient>().get(url + endpoint, _headers);
     return response.success
         ? (HaCalendars.fromResponse(jsonDecode(response.dataStr)), null)
         : (null, HaFailure(message: response.dataStr));
@@ -115,7 +116,7 @@ class HaApi {
     final endIsoStr = end.toIso8601String();
     final endpoint =
         '/api/calendars/$entityId?start=$starIsoStr&end=$endIsoStr';
-    final response = await _httpClient.get(url + endpoint, _headers);
+    final response = await sl.get<HttpClient>().get(url + endpoint, _headers);
     return response.success
         ? (HaCalendar.fromResponse(jsonDecode(response.dataStr)), null)
         : (null, HaFailure(message: response.dataStr));
@@ -127,7 +128,7 @@ class HaApi {
     required String time,
   }) async {
     final endpoint = '/api/camera_proxy/$entityId?time=$time';
-    final response = await _httpClient.get(url + endpoint, _headers);
+    final response = await sl.get<HttpClient>().get(url + endpoint, _headers);
     return response.success
         ? (response.dataBytes, null)
         : (null, HaFailure(message: response.dataStr));
@@ -146,7 +147,7 @@ class HaApi {
     final endpoint =
         '/api/history/period${startTimeStr != null ? '/$startTimeStr' : ''}'
         '${_formUrlParameters(params)}';
-    final response = await _httpClient.get(url + endpoint, _headers);
+    final response = await sl.get<HttpClient>().get(url + endpoint, _headers);
     if (response.success) {
       final states = <HaState>[];
       final list = (jsonDecode(response.dataStr) as List?);
@@ -175,7 +176,7 @@ class HaApi {
         '/api/logbook${startTimeStr != null ? '/$startTimeStr' : ''}'
         '${_formUrlParameters(params)}';
     final endpointEncoded = Uri.encodeFull(url + endpoint);
-    final response = await _httpClient.get(endpointEncoded, _headers);
+    final response = await sl.get<HttpClient>().get(endpointEncoded, _headers);
     return response.success
         ? (HaLogbook.fromResponse(jsonDecode(response.dataStr)), null)
         : (null, HaFailure(message: response.dataStr));
@@ -187,7 +188,8 @@ class HaApi {
   /// Needs config integration enabled. 
   Future<(HaCheckConfig?, HaFailure?)> checkConfig() async {
     const endpoint = '/api/config/core/check_config';
-    final response = await _httpClient.post(url + endpoint, _headers, null);
+    final response =
+        await sl.get<HttpClient>().post(url + endpoint, _headers, null);
     return response.success
         ? (HaCheckConfig.fromJson(jsonDecode(response.dataStr)), null)
         : (null, HaFailure(message: response.dataStr));
@@ -214,7 +216,8 @@ class HaApi {
       'state': state,
       'attributes': attributes,
     });
-    final response = await _httpClient.post(url + endpoint, _headers, data);
+    final response =
+        await sl.get<HttpClient>().post(url + endpoint, _headers, data);
     return response.success
         ? (HaState.fromJson(jsonDecode(response.dataStr)), null)
         : (null, HaFailure(message: response.dataStr));
@@ -231,7 +234,8 @@ class HaApi {
   }) async {
     final endpoint = '/api/events/$eventType';
     final data = jsonEncode(eventData);
-    final response = await _httpClient.post(url + endpoint, _headers, data);
+    final response =
+        await sl.get<HttpClient>().post(url + endpoint, _headers, data);
     return response.success
         ? (HaMessage.fromJson(jsonDecode(response.dataStr)), null)
         : (null, HaFailure(message: response.dataStr));
@@ -249,7 +253,8 @@ class HaApi {
   }) async {
     final endpoint = '/api/services/$domain/$service';
     final data = jsonEncode(serviceData);
-    final response = await _httpClient.post(url + endpoint, _headers, data);
+    final response =
+        await sl.get<HttpClient>().post(url + endpoint, _headers, data);
     return response.success
         ? (HaStates.fromResponse(jsonDecode(response.dataStr)), null)
         : (null, HaFailure(message: response.dataStr));
@@ -268,7 +273,8 @@ class HaApi {
       'template': template,
       'variables': variables,
     });
-    final response = await _httpClient.post(url + endpoint, _headers, data);
+    final response =
+        await sl.get<HttpClient>().post(url + endpoint, _headers, data);
     return response.success
         ? (response.dataStr, null)
         : (null, HaFailure(message: response.dataStr));
@@ -286,7 +292,8 @@ class HaApi {
       "name": name,
       "data": variables,
     });
-    final response = await _httpClient.post(url + endpoint, _headers, data);
+    final response =
+        await sl.get<HttpClient>().post(url + endpoint, _headers, data);
     return response.success
         ? (response.dataStr, null)
         : (null, HaFailure(message: response.dataStr));
