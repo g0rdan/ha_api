@@ -40,7 +40,7 @@ class HaConfig implements Exact {
   @JsonKey(name: 'recovery_mode')
   final bool? recoveryMode;
   @JsonKey(name: 'safe_mode')
-  final bool safeMode;
+  final bool? safeMode;
   @JsonKey(name: 'state')
   final String? state;
   @JsonKey(name: 'time_zone')

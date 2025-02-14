@@ -28,7 +28,7 @@ HaConfig _$HaConfigFromJson(Map<String, dynamic> json) => HaConfig(
       longitude: (json['longitude'] as num?)?.toDouble(),
       radius: (json['radius'] as num?)?.toInt(),
       recoveryMode: json['recovery_mode'] as bool?,
-      safeMode: json['safe_mode'] as bool,
+      safeMode: json['safe_mode'] as bool?,
       state: json['state'] as String?,
       timeZone: json['time_zone'] as String?,
       unitSystem: json['unit_system'] == null

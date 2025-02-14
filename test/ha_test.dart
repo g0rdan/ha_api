@@ -25,8 +25,8 @@ void main() {
     ServiceLocator.instance.register<HttpClient>(httpClient);
   });
 
-  group('Ping', () {
-    test('Success', () async {
+  group('ping', () {
+    test('ping - success', () async {
       when(httpClient.get('http://localhost:8123/api/', headers)).thenAnswer(
         (_) => Future.value(
           HttpResponse(
@@ -41,7 +41,7 @@ void main() {
       expect(error, isNull);
     });
 
-    test('Failure', () async {
+    test('ping - failure', () async {
       when(httpClient.get('http://localhost:8123/api/', headers)).thenAnswer(
         (_) => Future.value(HttpResponse(
           response: Response('{"message": "Error"}', 400),
@@ -51,6 +51,76 @@ void main() {
       final (pingResponse, error) = await haApi.ping();
 
       expect(pingResponse, isNull);
+      expect(error?.message, isNotNull);
+    });
+  });
+
+  group('getConfig', () {
+    test('getConfig - success', () async {
+      when(httpClient.get('http://localhost:8123/api/config', headers))
+          .thenAnswer(
+        (_) => Future.value(
+          HttpResponse(
+            response: Response(
+              '{"components": ["sensor.cpuspeed","frontend"],  "config_dir":"/home/ha/.homeassistant","elevation":510,"latitude":45.8781529,"location_name":"Home"}',
+              200,
+            ),
+          ),
+        ),
+      );
+
+      final (configResponse, error) = await haApi.getConfig();
+
+      expect(configResponse?.components?.isNotEmpty, isTrue);
+      expect(error, isNull);
+    });
+
+    test('getConfig - failure', () async {
+      when(httpClient.get('http://localhost:8123/api/config', headers))
+          .thenAnswer(
+        (_) => Future.value(HttpResponse(
+          response: Response('{"message": "Error"}', 400),
+        )),
+      );
+
+      final (configResponse, error) = await haApi.getConfig();
+
+      expect(configResponse, isNull);
+      expect(error?.message, isNotNull);
+    });
+  });
+
+  group('getEvents', () {
+    test('getEvents - success', () async {
+      when(httpClient.get('http://localhost:8123/api/events', headers))
+          .thenAnswer(
+        (_) => Future.value(
+          HttpResponse(
+            response: Response(
+              '[{"event": "state_changed","listener_count": 5},{"event": "time_changed","listener_count": 2}]',
+              200,
+            ),
+          ),
+        ),
+      );
+
+      final (eventsResponse, error) = await haApi.getEvents();
+
+      expect(eventsResponse?.data?.length, 2);
+      expect(error, isNull);
+    });
+
+    test('getEvents - failure', () async {
+      when(httpClient.get('http://localhost:8123/api/events', headers))
+          .thenAnswer(
+        (_) => Future.value(HttpResponse(
+          response: Response('{"message": "Error"}', 400),
+        )),
+      );
+
+      final (eventsResponse, error) = await haApi.getEvents();
+
+      expect(eventsResponse, isNull);
       expect(error?.message, isNotNull);
     });
   });
