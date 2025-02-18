@@ -30,7 +30,6 @@ POST
 
 More documentation can be found [here](https://developers.home-assistant.io/docs/api/rest/).
 
-
 ## Usage
 
 To add this package as a dependency, add the following to your `pubspec.yaml` file:
