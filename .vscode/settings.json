@@ -3,11 +3,15 @@
   "[dart]": {
     "editor.formatOnSave": true,
     "editor.bracketPairColorization.enabled": true,
-    "editor.rulers": [80],
+    "editor.rulers": [
+      80
+    ],
     "editor.codeActionsOnSave": {
       "source.organizeImports": "explicit",
       "source.fixAll": "explicit"
     }
   },
-  "cSpell.words": ["dartdocs"]
+  "cSpell.words": [
+    "dartdocs"
+  ]
 }

@@ -1,13 +1,16 @@
-import 'package:ha_api/src/ha_api.dart';
+import 'dart:io';
 
-void main() {
-  final url = const String.fromEnvironment('URL');
-  final token = const String.fromEnvironment('TOKEN');
+import 'package:ha_api/ha.dart';
 
-  HaService()
-    ..init(
-      url: url,
-      token: token,
-    )
-    ..ping();
+void main() async {
+  final url = Platform.environment['HA_API_URL']!;
+  final token = Platform.environment['HA_API_TOKEN']!;
+
+  final api = HaApi(
+    url: url,
+    token: token,
+  )..init();
+
+  final (pingResponse, failure) = await api.ping();
+  print('ping message: ${pingResponse?.message}');
 }

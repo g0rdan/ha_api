@@ -43,7 +43,7 @@ dependencies:
 
 Here are small examples that show you how to use the API.
 
-### Get the state of an entity
+### Get list of services
 
 ```dart
 import 'package:ha_api/ha_api.dart';

@@ -5,7 +5,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "home_assistant_dart_client",
+      "name": "ha_api",
       "request": "launch",
       "type": "dart",
       "program": "example/ha_example.dart"
