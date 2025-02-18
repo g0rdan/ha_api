@@ -20,7 +20,7 @@ class HaEvents implements Exact {
   Iterable<Object?> get properties => data ?? [];
 }
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class Event implements Exact {
   const Event({
     this.event,
@@ -33,8 +33,6 @@ class Event implements Exact {
   final int? listenerCount;
 
   factory Event.fromJson(Map<String, dynamic> json) => _$EventFromJson(json);
-
-  Map<String, dynamic> toJson() => _$EventToJson(this);
 
   @override
   Iterable<Object?> get properties => [

@@ -20,7 +20,7 @@ class HaLogbook implements Exact {
   Iterable<Object?> get properties => data ?? [];
 }
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class Logbook implements Exact {
   const Logbook({
     this.entityId,
@@ -59,8 +59,6 @@ class Logbook implements Exact {
 
   factory Logbook.fromJson(Map<String, dynamic> json) =>
       _$LogbookFromJson(json);
-
-  Map<String, dynamic> toJson() => _$LogbookToJson(this);
 
   @override
   Iterable<Object?> get properties => [

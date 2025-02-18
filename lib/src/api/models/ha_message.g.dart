@@ -9,7 +9,3 @@ part of 'ha_message.dart';
 HaMessage _$HaMessageFromJson(Map<String, dynamic> json) => HaMessage(
       message: json['message'] as String,
     );
-
-Map<String, dynamic> _$HaMessageToJson(HaMessage instance) => <String, dynamic>{
-      'message': instance.message,
-    };

@@ -20,7 +20,7 @@ class HaCalendars implements Exact {
   Iterable<Object?> get properties => data ?? [];
 }
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class CalendarEntity implements Exact {
   const CalendarEntity({
     required this.entityId,
@@ -35,8 +35,6 @@ class CalendarEntity implements Exact {
 
   factory CalendarEntity.fromJson(Map<String, dynamic> json) =>
       _$CalendarEntityFromJson(json);
-
-  Map<String, dynamic> toJson() => _$CalendarEntityToJson(this);
 
   @override
   Iterable<Object?> get properties => [

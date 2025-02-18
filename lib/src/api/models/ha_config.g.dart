@@ -42,32 +42,6 @@ HaConfig _$HaConfigFromJson(Map<String, dynamic> json) => HaConfig(
       internalUrl: json['internal_url'] as String?,
     );
 
-Map<String, dynamic> _$HaConfigToJson(HaConfig instance) => <String, dynamic>{
-      'allowlist_external_dirs': instance.allowlistExternalDirs,
-      'allowlist_external_urls': instance.allowlistExternalUrls,
-      'components': instance.components,
-      'config_dir': instance.configDir,
-      'config_source': instance.configSource,
-      'country': instance.country,
-      'currency': instance.currency,
-      'debug': instance.debug,
-      'elevation': instance.elevation,
-      'external_url': instance.externalUrl,
-      'internal_url': instance.internalUrl,
-      'language': instance.language,
-      'latitude': instance.latitude,
-      'location_name': instance.locationName,
-      'longitude': instance.longitude,
-      'radius': instance.radius,
-      'recovery_mode': instance.recoveryMode,
-      'safe_mode': instance.safeMode,
-      'state': instance.state,
-      'time_zone': instance.timeZone,
-      'unit_system': instance.unitSystem?.toJson(),
-      'version': instance.version,
-      'whitelist_external_dirs': instance.whitelistExternalDirs,
-    };
-
 UnitSystem _$UnitSystemFromJson(Map<String, dynamic> json) => UnitSystem(
       length: json['length'] as String?,
       accumulatedPrecipitation: json['accumulated_precipitation'] as String?,
@@ -78,15 +52,3 @@ UnitSystem _$UnitSystemFromJson(Map<String, dynamic> json) => UnitSystem(
       volume: json['volume'] as String?,
       windSpeed: json['wind_speed'] as String?,
     );
-
-Map<String, dynamic> _$UnitSystemToJson(UnitSystem instance) =>
-    <String, dynamic>{
-      'length': instance.length,
-      'accumulated_precipitation': instance.accumulatedPrecipitation,
-      'area': instance.area,
-      'mass': instance.mass,
-      'pressure': instance.pressure,
-      'temperature': instance.temperature,
-      'volume': instance.volume,
-      'wind_speed': instance.windSpeed,
-    };

@@ -20,7 +20,7 @@ class HaServices implements Exact {
   Iterable<Object?> get properties => data ?? [];
 }
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class ServicesDomain implements Exact {
   const ServicesDomain({
     this.domain,
@@ -35,8 +35,6 @@ class ServicesDomain implements Exact {
   factory ServicesDomain.fromJson(Map<String, dynamic> json) =>
       _$ServicesDomainFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ServicesDomainToJson(this);
-
   @override
   Iterable<Object?> get properties => [
         domain,
@@ -44,7 +42,7 @@ class ServicesDomain implements Exact {
       ];
 }
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class Service implements Exact {
   const Service({
     required this.name,
@@ -67,8 +65,6 @@ class Service implements Exact {
 
   factory Service.fromJson(Map<String, dynamic> json) =>
       _$ServiceFromJson(json);
-
-  Map<String, dynamic> toJson() => _$ServiceToJson(this);
 
   @override
   Iterable<Object?> get properties => [

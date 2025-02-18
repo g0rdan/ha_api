@@ -11,7 +11,5 @@
       "source.fixAll": "explicit"
     }
   },
-  "cSpell.words": [
-    "dartdocs"
-  ]
+  "cSpell.words": ["dartdocs", "homeassistant"]
 }

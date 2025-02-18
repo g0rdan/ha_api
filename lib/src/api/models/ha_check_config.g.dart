@@ -12,10 +12,3 @@ HaCheckConfig _$HaCheckConfigFromJson(Map<String, dynamic> json) =>
       errors: json['errors'],
       warnings: json['warnings'],
     );
-
-Map<String, dynamic> _$HaCheckConfigToJson(HaCheckConfig instance) =>
-    <String, dynamic>{
-      'result': instance.result,
-      'errors': instance.errors,
-      'warnings': instance.warnings,
-    };

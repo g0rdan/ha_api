@@ -17,11 +17,3 @@ HaState _$HaStateFromJson(Map<String, dynamic> json) => HaState(
           ? null
           : DateTime.parse(json['last_updated'] as String),
     );
-
-Map<String, dynamic> _$HaStateToJson(HaState instance) => <String, dynamic>{
-      'entity_id': instance.entityId,
-      'state': instance.state,
-      'attributes': instance.attributes,
-      'last_changed': instance.lastChanged?.toIso8601String(),
-      'last_updated': instance.lastUpdated?.toIso8601String(),
-    };

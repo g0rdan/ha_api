@@ -19,7 +19,7 @@ class HaStates implements Exact {
   Iterable<Object?> get properties => data ?? [];
 }
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class HaState implements Exact {
   const HaState({
     required this.entityId,
@@ -46,8 +46,6 @@ class HaState implements Exact {
 
   factory HaState.fromJson(Map<String, dynamic> json) =>
       _$HaStateFromJson(json);
-
-  Map<String, dynamic> toJson() => _$HaStateToJson(this);
 
   @override
   Iterable<Object?> get properties => [

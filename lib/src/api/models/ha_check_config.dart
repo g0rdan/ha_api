@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'ha_check_config.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class HaCheckConfig implements Exact {
   const HaCheckConfig({
     required this.result,
@@ -22,8 +22,6 @@ class HaCheckConfig implements Exact {
 
   factory HaCheckConfig.fromJson(Map<String, dynamic> json) =>
       _$HaCheckConfigFromJson(json);
-
-  Map<String, dynamic> toJson() => _$HaCheckConfigToJson(this);
 
   @override
   Iterable<Object?> get properties => [

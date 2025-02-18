@@ -3,7 +3,10 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'ha_config.g.dart';
 
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable(
+  explicitToJson: true,
+  createToJson: false,
+)
 class HaConfig implements Exact {
   @JsonKey(name: 'allowlist_external_dirs')
   final List<String>? allowlistExternalDirs;
@@ -80,8 +83,6 @@ class HaConfig implements Exact {
 
   factory HaConfig.fromJson(Map<String, dynamic> json) =>
       _$HaConfigFromJson(json);
-
-  Map<String, dynamic> toJson() => _$HaConfigToJson(this);
   
   @override
   Iterable<Object?> get properties => [
@@ -111,7 +112,10 @@ class HaConfig implements Exact {
       ];
 }
 
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable(
+  explicitToJson: true,
+  createToJson: false,
+)
 class UnitSystem implements Exact {
   @JsonKey(name: 'length')
   final String? length;
@@ -143,8 +147,6 @@ class UnitSystem implements Exact {
 
   factory UnitSystem.fromJson(Map<String, dynamic> json) =>
       _$UnitSystemFromJson(json);
-
-  Map<String, dynamic> toJson() => _$UnitSystemToJson(this);
   
   @override
   Iterable<Object?> get properties => [
