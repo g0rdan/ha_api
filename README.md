@@ -1,39 +1,64 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Home Assistant API client for Dart
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages). 
+An API client for [Home Assistant](https://www.home-assistant.io) automation framework.
+If you ever wanted to control your home from your Dart application, this is the package for you.
+The client covers following Home Assistant APIs:
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages). 
--->
+GET
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+- `/api/`
+- `/api/config`
+- `/api/events`
+- `/api/services`
+- `/api/history/period/<timestamp>`
+- `/api/logbook/<timestamp>`
+- `/api/states`
+- `/api/states/<entity_id>`
+- `/api/error_log`
+- `/api/camera_proxy/<camera entity_id>`
+- `/api/calendars`
+- `/api/calendars/<calendar entity_id>`
 
-## Features
+POST
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- `/api/states/<entity_id>`
+- `/api/events/<event_type>`
+- `/api/services/<domain>/<service>`
+- `/api/template`
+- `/api/config/core/check_config`
+- `/api/intent/handle`
 
-## Getting started
+More documentation can be found [here](https://developers.home-assistant.io/docs/api/rest/).
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+To add this package as a dependency, add the following to your `pubspec.yaml` file:
 
-```dart
-const like = 'sample';
+```yaml
+dependencies:
+  ha_api: ^0.1.0
 ```
 
-## Additional information
+## Examples
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+Here are small examples that show you how to use the API.
+
+### Get the state of an entity
+
+```dart
+import 'package:ha_api/ha_api.dart';
+
+void main() async {
+  final haClient = HaApi(
+    url: 'yourIpAndPort',
+    token: 'yourBearerToken',
+  // make sure you call init() before using the client
+  )..init();
+
+  final (services, failure) = await service.getServices();
+}
+
+```
+
+If the request was successful, the `services` variable will contain the result. If the request failed, the `failure` variable will contain the error.

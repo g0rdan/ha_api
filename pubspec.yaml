@@ -1,6 +1,6 @@
 name: ha_api
 description: Dart client library for the Home Assistant API.
-version: 0.0.1
+version: 0.1.0
 repository: https://github.com/g0rdan/home_assistant_dart_client
 
 environment:
