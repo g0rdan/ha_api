@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:ha_api/ha.dart';
+import 'package:ha_api/ha_api.dart';
 
 void main() async {
   final url = Platform.environment['HA_API_URL']!;

@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:ha_api/ha.dart';
+import 'package:ha_api/ha_api.dart';
 import 'package:ha_api/src/http/http_client.dart';
 import 'package:ha_api/src/http/models/http_response.dart';
 import 'package:ha_api/src/system/service_locator.dart';
