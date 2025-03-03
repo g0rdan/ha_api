@@ -25,7 +25,7 @@ import 'package:mockito/mockito.dart' as _i1;
 
 class _FakeHttpResponse_0 extends _i1.SmartFake implements _i2.HttpResponse {
   _FakeHttpResponse_0(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
+      : super(parent, parentInvocation);
 }
 
 /// A class which mocks [HttpClient].
@@ -39,15 +39,14 @@ class MockHttpClient extends _i1.Mock implements _i3.HttpClient {
   @override
   _i4.Future<_i2.HttpResponse> get(String? url, Map<String, String>? headers) =>
       (super.noSuchMethod(
+        Invocation.method(#get, [url, headers]),
+        returnValue: _i4.Future<_i2.HttpResponse>.value(
+          _FakeHttpResponse_0(
+            this,
             Invocation.method(#get, [url, headers]),
-            returnValue: _i4.Future<_i2.HttpResponse>.value(
-              _FakeHttpResponse_0(
-                this,
-                Invocation.method(#get, [url, headers]),
-              ),
-            ),
-          )
-          as _i4.Future<_i2.HttpResponse>);
+          ),
+        ),
+      ) as _i4.Future<_i2.HttpResponse>);
 
   @override
   _i4.Future<_i2.HttpResponse> post(
@@ -56,13 +55,12 @@ class MockHttpClient extends _i1.Mock implements _i3.HttpClient {
     String? body,
   ) =>
       (super.noSuchMethod(
+        Invocation.method(#post, [url, headers, body]),
+        returnValue: _i4.Future<_i2.HttpResponse>.value(
+          _FakeHttpResponse_0(
+            this,
             Invocation.method(#post, [url, headers, body]),
-            returnValue: _i4.Future<_i2.HttpResponse>.value(
-              _FakeHttpResponse_0(
-                this,
-                Invocation.method(#post, [url, headers, body]),
-              ),
-            ),
-          )
-          as _i4.Future<_i2.HttpResponse>);
+          ),
+        ),
+      ) as _i4.Future<_i2.HttpResponse>);
 }

@@ -83,7 +83,7 @@ class HaConfig implements Exact {
 
   factory HaConfig.fromJson(Map<String, dynamic> json) =>
       _$HaConfigFromJson(json);
-  
+
   @override
   Iterable<Object?> get properties => [
         ...?allowlistExternalDirs,
@@ -147,7 +147,7 @@ class UnitSystem implements Exact {
 
   factory UnitSystem.fromJson(Map<String, dynamic> json) =>
       _$UnitSystemFromJson(json);
-  
+
   @override
   Iterable<Object?> get properties => [
         length,

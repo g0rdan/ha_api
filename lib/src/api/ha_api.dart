@@ -42,7 +42,7 @@ class HaApi {
         : (null, HaFailure(message: response.dataStr));
   }
 
-  /// Returns an array of event objects. Each event object contains event name 
+  /// Returns an array of event objects. Each event object contains event name
   /// and listener count.
   Future<(HaEvents?, HaFailure?)> getEvents() async {
     const endpoint = '/api/events';
@@ -52,7 +52,7 @@ class HaApi {
         : (null, HaFailure(message: response.dataStr));
   }
 
-  /// Returns an array of service objects. Each object contains the domain and 
+  /// Returns an array of service objects. Each object contains the domain and
   /// which services it contains.
   Future<(HaServices?, HaFailure?)> getServices() async {
     const endpoint = '/api/services';
@@ -62,7 +62,7 @@ class HaApi {
         : (null, HaFailure(message: response.dataStr));
   }
 
-  /// Returns an array of state objects. Each state has the following 
+  /// Returns an array of state objects. Each state has the following
   /// attributes: entity_id, state, last_changed and attributes.
   Future<(HaStates?, HaFailure?)> getStates() async {
     const endpoint = '/api/states';
@@ -83,7 +83,7 @@ class HaApi {
         : (null, HaFailure(message: response.dataStr));
   }
 
-  /// Retrieve all errors logged during the current session of Home Assistant 
+  /// Retrieve all errors logged during the current session of Home Assistant
   /// as a plaintext response.
   Future<(String?, HaFailure?)> getErrorLog() async {
     const endpoint = '/api/error_log';
@@ -102,10 +102,10 @@ class HaApi {
         : (null, HaFailure(message: response.dataStr));
   }
 
-  /// Returns the list of calendar events for the specified calendar entity_id 
-  /// between the start and end times (exclusive). 
-  /// 
-  /// The events in the response have a start and end that contain either 
+  /// Returns the list of calendar events for the specified calendar entity_id
+  /// between the start and end times (exclusive).
+  ///
+  /// The events in the response have a start and end that contain either
   /// dateTime or date for an all day event.
   Future<(HaCalendar?, HaFailure?)> getCalendar({
     required String entityId,
@@ -160,7 +160,6 @@ class HaApi {
     } else {
       return (null, HaFailure(message: response.dataStr));
     }
-
   }
 
   Future<(HaLogbook?, HaFailure?)> getLogbook({
@@ -182,10 +181,10 @@ class HaApi {
         : (null, HaFailure(message: response.dataStr));
   }
 
-  /// Trigger a check of configuration.yaml. 
-  /// 
-  /// No additional data needs to be passed in with this request. 
-  /// Needs config integration enabled. 
+  /// Trigger a check of configuration.yaml.
+  ///
+  /// No additional data needs to be passed in with this request.
+  /// Needs config integration enabled.
   Future<(HaCheckConfig?, HaFailure?)> checkConfig() async {
     const endpoint = '/api/config/core/check_config';
     final response =
@@ -195,7 +194,7 @@ class HaApi {
         : (null, HaFailure(message: response.dataStr));
   }
 
-  /// Updates or creates a state. You can create any state that you want, 
+  /// Updates or creates a state. You can create any state that you want,
   /// it does not have to be backed by an entity in Home Assistant.
   ///
   /// This endpoint sets the representation of a device within Home Assistant
@@ -223,9 +222,9 @@ class HaApi {
         : (null, HaFailure(message: response.dataStr));
   }
 
-  /// Fires an event with event_type. 
-  /// 
-  /// Please be mindful of the data structure as documented on our [Data Science portal](https://data.home-assistant.io/docs/events/#database-table). 
+  /// Fires an event with event_type.
+  ///
+  /// Please be mindful of the data structure as documented on our [Data Science portal](https://data.home-assistant.io/docs/events/#database-table).
   /// You can pass an optional JSON object to be used as event_data.
   /// Returns a message if successful.
   Future<(HaMessage?, HaFailure?)> postEvent({
@@ -241,10 +240,10 @@ class HaApi {
         : (null, HaFailure(message: response.dataStr));
   }
 
-  /// Calls a service within a specific domain. 
-  /// 
-  /// Will return when the service has been executed. You can pass an optional 
-  /// JSON object to be used as service_data. Returns a list of states that 
+  /// Calls a service within a specific domain.
+  ///
+  /// Will return when the service has been executed. You can pass an optional
+  /// JSON object to be used as service_data. Returns a list of states that
   /// have changed while the service was being executed.
   Future<(HaStates?, HaFailure?)> postService({
     required String domain,
@@ -260,9 +259,9 @@ class HaApi {
         : (null, HaFailure(message: response.dataStr));
   }
 
-  /// Render a Home Assistant template. 
-  /// 
-  /// See [template docs](https://www.home-assistant.io/docs/configuration/templating) for more information. 
+  /// Render a Home Assistant template.
+  ///
+  /// See [template docs](https://www.home-assistant.io/docs/configuration/templating) for more information.
   /// Returns the rendered template in plain text.
   Future<(String?, HaFailure?)> postTemplate({
     required String template,

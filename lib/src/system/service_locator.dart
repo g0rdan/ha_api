@@ -24,7 +24,7 @@ class ServiceLocator {
   // Get a service
   T get<T>() {
     final service = _services[T];
-    
+
     if (service == null) {
       throw StateError('Service $T not found');
     }
@@ -52,6 +52,6 @@ class ServiceLocator {
 // Helper class for lazy initialization
 class _LazyService {
   final Function factory;
-  
+
   _LazyService(this.factory);
 }

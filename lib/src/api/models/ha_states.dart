@@ -14,7 +14,7 @@ class HaStates implements Exact {
       data: (list as Iterable).map((e) => HaState.fromJson(e)).toList(),
     );
   }
-  
+
   @override
   Iterable<Object?> get properties => data ?? [];
 }
